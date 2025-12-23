@@ -22,7 +22,7 @@ def make_extension(name, package):
             "cxx": ["-O3"],
             "nvcc": ["--expt-extended-lambda"],
         },
-        include_dirs=["include/"],
+        include_dirs=[path.join(here, "include")],
     )
 
 here = path.abspath(path.dirname(__file__))

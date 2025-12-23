@@ -9,12 +9,14 @@
 import matplotlib
 
 # Check if Tkinter is there otherwise Agg
-import imp
-try:
-    imp.find_module('_Tkinter')
-    pass
-except ImportError:
-    matplotlib.use('Qt5Agg')
+# import imp
+# try:
+#     imp.find_module('_Tkinter')
+#     pass
+# except ImportError:
+#     matplotlib.use('Qt5Agg')
+
+matplotlib.use('Agg')  # Use Agg backend for non-GUI environments
 
 import matplotlib.pyplot as plt
 import numpy as np
