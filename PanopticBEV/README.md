@@ -263,3 +263,56 @@ SeaBird and [BBAVectors](https://github.com/yijingru/BBAVectors-Oriented-Object-
 
 ## Contact
 For questions, feel free to post here or drop an email to this address- ```abhinav3663@gmail.com```
+
+
+## Notes on Custom Setup & Adaptations (Fork)
+
+This fork includes additional notes and fixes for:
+- Running PanopticBEV under Ubuntu 24.04
+- Datasets and checkpoints linked using external drives via symlinks
+- Evaluation workflows for inference and downstream deployment
+
+For inference, demos, and deployment on an RC car, running **evaluation on the validation split with pre-trained checkpoints is sufficient**. The official KITTI-360 *test* split is **not required** unless reproducing benchmark numbers for leaderboard submission.
+
+These changes **do not alter the original model or results** and are intended for ease of reproduction and extension.
+
+### Dataset Structure Clarification
+
+The original KITTI-360 directory layout expected by this repository includes the official `data_2d_raw` folder, which must contain **both**:
+- Perspective Images for Train & Val
+- Test semantic-related files from the official KITTI-360 release
+
+Structure FYI:
+```text
+SeaBird/PanopticBEV
+├── data
+│   └── kitti_360
+│       ├── ImageSets
+│       ├── KITTI-360
+│       │   ├── calibration
+│       │   ├── data_2d_raw
+│       │   ├── data_2d_semantics
+│       │   ├── data_3d_boxes
+│       │   └── data_poses
+|...
+```
+
+
+### Inference Script Note
+
+When running `scripts_inference.sh`, make sure to explicitly set the project root: 
+```text
+--project_root_dir=/path/to/this/repo
+```
+This should point to the SeaBird/PanopticBEV directory to ensure all relative paths (e.g., data/, output/) resolve correctly.
+
+### RC Car Data Collection Utility (Optional)
+
+This fork additionally includes a lightweight Python utility for collecting front-view camera images on an RC car platform:`deploy_car/pic_take.py`
+
+
+This script is intended as a **reference data-logging tool** for future domain adaptation or fine-tuning. It captures timestamped RGB frames from a single monocular camera and stores them in a KITTI-style sequential format.
+
+Using this script is **not required** to run evaluation or inference with the provided pre-trained SeaBird models. It is included to make it easier for others to extend this repository toward real-world robotics or RC-car deployments.
+
+
