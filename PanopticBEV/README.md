@@ -278,9 +278,9 @@ These changes **do not alter the original model or results** and are intended fo
 
 ### Dataset Structure Clarification
 
-The original KITTI-360 directory layout expected by this repository includes the official `data_2d_raw` folder, which must contain **both**:
+The original KITTI-360 directory layout expected by this repository includes the `data_2d_raw` folder from official KITTI-360 release, which must contain **both**:
 - Perspective Images for Train & Val
-- Test semantic-related files from the official KITTI-360 release
+- Test semantic
 
 Structure FYI:
 ```text
